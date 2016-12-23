@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 import multiprocessing, asyncio, logging, concurrent.futures, time, uuid, sys
 
@@ -78,7 +78,7 @@ class Broker(object):
         return
 
     @classmethod
-    def __start__(clsself, pipeEnd:multiprocessing.connection.Pipe, processorConstructor, *pc_args, **pc_kwargs):
+    def __start__(clsself, pipeEnd:multiprocessing.connection.Pipe, processorConstructor, pc_args, pc_kwargs):
         """Instantiates processorConstructor and executes calls on the instance of the processor.
 
         Listens for incoming calls through the pipe.
@@ -110,14 +110,12 @@ class Broker(object):
             # process input synchronously
             logging.info("{0} processing".format(call.Key))
             # execute the said method on the processor
-            response = AsyncResponse(call.Key, False, None)
+            response = None
             try:
                 returned = processor.__getattribute__(call.TargetMethod)(*call.Args, **call.Kwargs)
-                response.Result = returned
-                response.Success = True
+                response = AsyncResponse(call.Key, True, returned, None)
             except:
-                response.Success = False
-                response.Error = sys.exc_info()[1]
+                response = AsyncResponse(call.Key, False, None, sys.exc_info()[1])
             pipeEnd.send((response,))
             # continue looping
         # will never return
