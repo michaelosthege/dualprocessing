@@ -1,6 +1,8 @@
 from __future__ import absolute_import
 from __future__ import print_function
 
+__version__ = "0.2.1"
+
 import multiprocessing, asyncio, logging, concurrent.futures, time, uuid, sys
 
 class AsyncCall(object):
