@@ -99,10 +99,10 @@ class Broker(object):
         *pc_kwargs
             Arbitrary keyword arguments (of the processor constructor)
         """
-        logging.info("Broker: process started")
+        logging.info("Broker: initializing...")
         # we're now on the second process, so we can create the processor
         processor = processorConstructor(*pc_args, **pc_kwargs)
-        logging.info("Broker: processor initialized")
+        logging.info("Broker: initialization completed")
         # endlessly loop
         while True:
             # get input key
