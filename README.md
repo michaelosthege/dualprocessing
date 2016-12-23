@@ -21,3 +21,11 @@ A **pipe connection** between the Broker (first process) and the Processor (seco
 Each call is indentified by a unique key. When a it comes in, it is passed through the pipe to the backend computation process. The loop at the other end of the pipe sequentially does the (blocking) calls, while the main thread asynchronously waits for the response to be returned through the pipe.
 
 For an example of a webservice using the *dualprocessing* module, take a look [here](https://github.com/michaelosthege/tornado-compute).
+
+
+# Installation
+The package is indexed on Pypi, so you can install it via `pip`:
+
+```bash
+pip install dualprocessing
+```

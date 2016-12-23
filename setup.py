@@ -34,3 +34,19 @@ setup(
         "Intended Audience :: Developers"
     ]
 )
+
+
+########### How to upload
+# In the command line, navigate to the project directory
+# then run
+# >>> python setup.py sdist register -r pypi upload -r pypi
+# or
+# >>> python setup.py sdist register -r pypitest upload -r pypitest
+
+# Make sure to commit with a version-number tag!!
+# >>> git tag [versionnumber]
+# >>> git push --tags
+
+#### References
+# http://peterdowns.com/posts/first-time-with-pypi.html
+
